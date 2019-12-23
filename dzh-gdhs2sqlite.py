@@ -166,11 +166,11 @@ if __name__ == "__main__":
     gpdmb=gpdmb.join(gpssrq)
     
     #去掉还未上市的
-    gpdmb=gpdmb.loc[(~(gpdmb['ssrq'].isna()) & (gpdmb['ssrq']<'20190501'))]
+    gpdmb=gpdmb.loc[(~(gpdmb['ssrq'].isna()) & (gpdmb['ssrq']<'20191201'))]
     
 #    sys.exit()
     
-    dbfn=my.getdrive()+'\\hyb\\DZH.db'
+    dbfn=r'E:\data\sqlite\DZH.db'
     dbcn = sqlite3.connect(dbfn)
     
     start_time = time.time()

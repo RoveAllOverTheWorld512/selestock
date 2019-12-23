@@ -129,8 +129,8 @@ if __name__ == "__main__":
 
     socket.setdefaulttimeout(20)  # 设置socket层的超时时间为20秒
     
-    now1 = datetime.datetime.now().strftime('%H:%M:%S')
-    print('开始运行时间：%s' % now1)
+    now1 = datetime.datetime.now()
+    print('开始运行时间：%s' % now1.strftime('%H:%M:%S'))
 
     gpdmb=my.get_gpdm()
     
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     
 #    sys.exit()
     
-    dbfn=my.getdrive()+'\\hyb\\DZH.db'
+    dbfn=r'E:\data\sqlite\DZH.db'
     dbcn = sqlite3.connect(dbfn)
     
     start_time = time.time()
@@ -184,9 +184,13 @@ if __name__ == "__main__":
     dbcn.close()
 
 
-    now2 = datetime.datetime.now().strftime('%H:%M:%S')
-    print('开始运行时间：%s' % now1)
-    print('结束运行时间：%s' % now2)
+    now2 = datetime.datetime.now()
+        
+    print('开始运行时间：%s' % now1.strftime('%H:%M:%S'))
+    print('结束运行时间：%s' % now2.strftime('%H:%M:%S'))
+
+    t = (now2 - now1).seconds / 60
+    print('所用时间：%5.2f分钟' % t)
 
 '''
 python使用pyquery库总结 

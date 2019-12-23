@@ -27,7 +27,7 @@ import dateutil.parser
 ########################################################################
 def iniconfig():
     myname=filename(sys.argv[0])
-    wkdir = os.getcwd()
+    wkdir = os.path.dirname(os.path.realpath(__file__))
     inifile = os.path.join(wkdir,myname+'.ini')  #设置缺省配置文件
     return ConfigObj(inifile,encoding='GBK')
 
@@ -178,6 +178,7 @@ def alltradedate():
     return cal
     
 if __name__ == '__main__':
+    wkdir = os.path.dirname(os.path.realpath(__file__))
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'hvc:b:e:', ['help','version','cfg=','bgdate=','eddate='])
@@ -210,8 +211,8 @@ if __name__ == '__main__':
             print ('无效参数！')
             sys.exit(3)
 
-    wkdir = os.getcwd()
     diskroot = wkdir[:2]+"\\"
+
     if iniyes and not os.path.exists(inifile) :
         print("配置文件%s不存在，请检查。" % inifile)
         iniyes = False

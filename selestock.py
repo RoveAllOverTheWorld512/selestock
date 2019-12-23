@@ -61,11 +61,15 @@ import xlrd
 import subprocess
 from io import StringIO
 
+SQLITE_PATH = r'E:\data\sqlite'  # sqlite数据库文件夹
+DATA_PATH = r'E:\data' # 数据文件夹
+
 ########################################################################
 #建立数据库
 ########################################################################
 def createDataBase():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
 
     """
@@ -897,7 +901,8 @@ def gettdxdir():
 #获取中证指数公司公布的PE、PB
 ########################################################################
 def get_pepb(date):
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -1336,6 +1341,7 @@ def getdrive():
 ##########################################################################
 def DeleTables(dbfn):    
 #    dbfn=getdrive()+'\\hyb\\STOCKHY.db'
+#    dbfn = os.path.join(SQLITE_PATH, 'STOCKHY.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
 
@@ -1354,7 +1360,8 @@ def DeleTables(dbfn):
 #查询股票
 ##########################################################################
 def Query(gpdm):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
     sql='''select gpfldm.gpdm,gpdm.gpmc,gpfldm.zldm,zldm.ZLMC,gpfldm.fldm,fldm.flmc 
@@ -1371,7 +1378,8 @@ def Query(gpdm):
 ##########################################################################
 def gpdmtbl():
     
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     gpdmb=get_gpdm()
     data=[[a[0],a[1]] for a in gpdmb.values.tolist()]
@@ -1681,7 +1689,8 @@ def write_eps():
     
     createDataBase()
     
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
 
     config = iniconfig()
@@ -1710,7 +1719,8 @@ def write_eps():
 #写入财报数据
 ##########################################################################
 def write_nb():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
 
     config = iniconfig()
@@ -1761,7 +1771,8 @@ def write_growth():
     
     createDataBase()
     prefix = 'czx'
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
 
     config = iniconfig()
@@ -1832,7 +1843,8 @@ def clearsheet(shtn):
 #查询2013-2016年yysr
 ##########################################################################
 def query_yysr(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1858,7 +1870,8 @@ def query_yysr(nf):
 #查询2013-2016年jlr
 ##########################################################################
 def query_jlr(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1883,7 +1896,8 @@ def query_jlr(nf):
 #查询2013-2016年roe
 ##########################################################################
 def query_roe(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1905,7 +1919,8 @@ def query_roe(nf):
 #查询2013-2016年roa
 ##########################################################################
 def query_roa(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1927,7 +1942,8 @@ def query_roa(nf):
 #查询2013-2016年jll净利率
 ##########################################################################
 def query_jll(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1949,7 +1965,8 @@ def query_jll(nf):
 #查询2013-2016年jll净利率
 ##########################################################################
 def query_mll(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1972,7 +1989,8 @@ def query_mll(nf):
 #查询2013-2016年收入自由现金含量
 ##########################################################################
 def query_srzyxjhl1(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -1994,7 +2012,8 @@ def query_srzyxjhl1(nf):
 #查询2013-2016年收入自由现金含量
 ##########################################################################
 def query_srzyxjhl2(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -2016,7 +2035,8 @@ def query_srzyxjhl2(nf):
 #查询nf年报eps0基本每股收益
 ##########################################################################
 def query_eps(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -2038,7 +2058,8 @@ def query_eps(nf):
 #查询nf年报eps0基本每股收益
 ##########################################################################
 def query_epsg(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -2061,7 +2082,8 @@ def query_epsg(nf):
 #筛选2015和2016年营业收入和净利润都基本保持增长或减幅在5%以内的生成股票池
 ##########################################################################
 def stkpool_grth():    
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -2081,7 +2103,8 @@ def stkpool_grth():
 #筛选2015和2016年roe>10的生成股票池
 ##########################################################################
 def stkpool_roe():    
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -2101,7 +2124,8 @@ def stkpool_roe():
 #筛选2015和2016年基本eps增长率>0,eps>0
 ##########################################################################
 def stkpool_eps0_g():    
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -2121,7 +2145,8 @@ def stkpool_eps0_g():
 #筛选2015和2016年基本eps增长率>0,eps>0
 ##########################################################################
 def stkpool_2016():    
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     #2016年基本PES>0.05，基本EPS增长率>-5%，营业总收入增长率>-5%，营业收入增长率>-5%，净利润增长率>-5%，净利润>0，净资产收益率>10%
@@ -2143,7 +2168,8 @@ def stkpool_2016():
 #筛选2016年商誉净资产占比>40的生成股票池
 ##########################################################################
 def stkpool_syjzczb():    
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -2507,7 +2533,8 @@ def dl_iwencaixls2():
 #查询roe
 ##########################################################################
 def get_roe(nf1,nf2,v=None):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for nf in range(nf1,nf2):
@@ -2539,7 +2566,8 @@ def get_roe(nf1,nf2,v=None):
 #查询roa
 ##########################################################################
 def get_roa(nf1,nf2,v=None):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for nf in range(nf1,nf2):
@@ -2571,7 +2599,8 @@ def get_roa(nf1,nf2,v=None):
 #查询净利率
 ##########################################################################
 def get_jll(nf1,nf2,v=None):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for nf in range(nf1,nf2):
@@ -2603,7 +2632,8 @@ def get_jll(nf1,nf2,v=None):
 #查询营业收入自由现金流含量
 ##########################################################################
 def get_srzyxjhl2(nf1,nf2,v=None):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for nf in range(nf1,nf2):
@@ -2634,7 +2664,8 @@ def get_srzyxjhl2(nf1,nf2,v=None):
 #查询营业收入自由现金流含量
 ##########################################################################
 def get_srzyxjhl1(nf1,nf2,v=None):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for nf in range(nf1,nf2):
@@ -2665,7 +2696,8 @@ def get_srzyxjhl1(nf1,nf2,v=None):
 #查询利润现金流含量
 ##########################################################################
 def get_lrxjlhl(nf1,nf2):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for nf in range(nf1,nf2):
@@ -2769,7 +2801,8 @@ def get_yjyg(nf):
     gpgb.index=[e+('.SH' if e[0]=='6' else '.SZ') for e in gpgb.index]
     gpgb.index.name='gpdm'
 
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -2831,7 +2864,8 @@ def get_yjyg_bgq(nbrq):
         
     nbrq=dateutil.parser.parse(nbrq).strftime("%Y.%m.%d")
 
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -2868,7 +2902,8 @@ def get_yjkb_bgq(nbrq):
         
     nbrq=dateutil.parser.parse(nbrq).strftime("%Y.%m.%d")
 
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -2894,7 +2929,8 @@ def get_yjbb_bgq(nbrq):
         
     nbrq=dateutil.parser.parse(nbrq).strftime("%Y.%m.%d")
 
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -2943,7 +2979,8 @@ def get_zxyj_bgq(nbrq):
 ##########################################################################
 def get_yjkb(nf):
     
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -2968,7 +3005,8 @@ def get_yjkb(nf):
 #查询业绩报表
 ##########################################################################
 def get_yjbb(nf):
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     nbrq=str(nf)+'.12.31'
@@ -2994,7 +3032,8 @@ def get_yjbb(nf):
 #查询股票申万行业代码与名称
 ##########################################################################
 def get_swhy():
-    dbfn=getdrive()+'\\hyb\\STOCKHY.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKHY.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKHY.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -3023,7 +3062,8 @@ def get_yyrq(bgrq):
     if isinstance(bgrq,str):
         bgrq=dateutil.parser.parse(bgrq).strftime('%Y.%m.%d')
     
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -3046,7 +3086,8 @@ def get_yyrq(bgrq):
 #查询股票商誉占比
 ##########################################################################
 def get_syzb0():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -3297,15 +3338,16 @@ def xg_jlrjyxjlhl():
 ##########################################################################
 def get_gdhs():
 
-    dbfn=getdrive()+'\\hyb\\DZH.db'
+#    dbfn=getdrive()+'\\hyb\\DZH.db'
+    dbfn = os.path.join(SQLITE_PATH, 'DZH.db')
     
 #    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     #rq0最新、rq1最新季度、rq2最新年度、rq3上一年度
-    rq1='2019-06-30'
+    rq1='2019-09-30'
     rq2='2018-12-31'
-    rq3='2018-06-30'
+    rq3='2018-09-30'
     #提取年报以来最新股东户数，注意最新在前
     sql="select gpdm,rq,gdhs from gdhs where rq>='%s' order by rq desc;" % rq2    
     curs.execute(sql)
@@ -3676,7 +3718,8 @@ def get_yysr_nf_n(nf,n):
 ########################################################################
 def get_dzh_dgdltzb():
 
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -3703,7 +3746,8 @@ def get_dzh_dgdltzb():
 ########################################################################
 def get_dfcf_dgdltzb():
 
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -3746,7 +3790,8 @@ def get_shcg():
 ########################################################################
 def get_shcg3():
 
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -4268,7 +4313,8 @@ def get_yj2017():
 #获取研究机构对2018年盈利预测的EPS均值、最高、最低，研究就够至少2家
 ##########################################################################
 def get_ylyc2018():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
 #    rq = (datetime.datetime.now()-datetime.timedelta(183)).strftime('%Y-%m-%d')
@@ -4299,7 +4345,8 @@ def get_ylyc2018():
 #获取研究机构对2018年盈利预测的EPS均值、最高、最低，研究就够至少2家
 ##########################################################################
 def get_ylyc2018_dzh():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
     rq = (datetime.datetime.now()-datetime.timedelta(183)).strftime('%Y-%m-%d')
@@ -4336,7 +4383,8 @@ def get_ylyc2018_dzh():
 #获取研究机构对2018年盈利预测的EPS均值、最高、最低，研究就够至少2家
 ##########################################################################
 def get_ylyc2018_gao():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
     rq = (datetime.datetime.now()-datetime.timedelta(183)).strftime('%Y-%m-%d')
@@ -4371,7 +4419,8 @@ def get_ylyc2018_gao():
 #获取研究机构对2018年盈利预测的EPS均值、最高、最低，研究就够至少2家
 ##########################################################################
 def get_ylyc2018_cfi():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
     rq = (datetime.datetime.now()-datetime.timedelta(183)).strftime('%Y-%m-%d')
@@ -4440,7 +4489,8 @@ def getpjjg():
 #获取研究机构对2018年盈利预测的EPS均值、最高、最低，研究就够至少2家
 ##########################################################################
 def ylyc2018():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
     rq = (datetime.datetime.now()-datetime.timedelta(183)).strftime('%Y-%m-%d')
@@ -4514,7 +4564,8 @@ def ylyc2018():
 #获取研究机构对2018年盈利预测的EPS均值、最高、最低,保存为XLS文件
 ##########################################################################
 def save_2018ylyc():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     cn = sqlite3.connect(dbfn)
     curs = cn.cursor()
     rq = (datetime.datetime.now()-datetime.timedelta(183)).strftime('%Y-%m-%d')
@@ -4624,7 +4675,8 @@ def rqttm(nf,jd):
 def get_g(gpdm_nf_jd_y):
     gpdm=gpdm_nf_jd_y.split('|')[0]
     nf_jd_y=gpdm_nf_jd_y.split('|')[1]
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     gpdm = lgpdm(gpdm)
@@ -4676,7 +4728,8 @@ def get_g(gpdm_nf_jd_y):
 def get_yysr_ttm(gpdm_nf_jd):
     gpdm=gpdm_nf_jd.split('|')[0]
     nf_jd_y=gpdm_nf_jd.split('|')[1]
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     gpdm = lgpdm(gpdm)
@@ -5009,7 +5062,8 @@ def pool_peg(nf):
     rq3=str(nf-1)+'.12.31'
     ssrq=get_ssrq()
     ssrq=ssrq[ssrq['ssrq']<rq1]
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -5058,7 +5112,8 @@ def gphg():
     td=datetime.datetime.now()
     m1=(td+datetime.timedelta(-365)).strftime("%Y-%m-%d")
     
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     sql='''
@@ -5099,7 +5154,8 @@ def gggdcgbdxx():
 
     jjlst=[['半年增持',m2,m3,'增持'],['三月增持',m1,m2,'增持'],['月内增持',m0,m1,'增持'],
            ['半年减持',m2,m3,'减持'],['三月减持',m1,m2,'减持'],['月内减持',m0,m1,'减持']]   
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for blkname,i,j,k in jjlst:
@@ -5142,7 +5198,8 @@ def xsjjxx():
     m6=datetime.date(y+(0 if m+6<=12 else 1),(m+6 if m+6<=12 else m+6-12),1).strftime("%Y-%m-%d")
 
     jjlst=[['本月解禁',m0,m1],['下月解禁',m1,m2],['三月解禁',m2,m3],['半年解禁',m3,m6]]   
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     for blkname,i,j in jjlst:
@@ -6922,7 +6979,8 @@ def max_drawdown(df):
 ###############################################################################
 def get_yjfprq():
     zxfprq={}
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     
@@ -7026,7 +7084,8 @@ def xg4(df):
 #运行D:\selestock\eastmoney_xsjjhz2sqlite.py 更新STOCKDATA.db数据库xsjj_dfcf表
 ###############################################################################
 def dfjj():
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     td0=datetime.datetime.now()
@@ -7065,7 +7124,8 @@ def dfjj():
 #送转股比例
 ###############################################################################
 def get_szgbl():
-    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKEPS.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKEPS.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
 
@@ -7093,7 +7153,8 @@ def gggdzjctj():
     m0=td.strftime("%Y-%m-%d")
     m1=(td+datetime.timedelta(-30*6)).strftime("%Y-%m-%d")
 
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     sql='''select distinct gpdm from gggdcgbd 
@@ -7137,7 +7198,8 @@ def gggdzjc_sum(gpdm):
     m2=(td+datetime.timedelta(-30*3)).strftime("%Y-%m-%d")
     m3=(td+datetime.timedelta(-30*1)).strftime("%Y-%m-%d")
 
-    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+#    dbfn=getdrive()+'\\hyb\\STOCKDATA.db'
+    dbfn = os.path.join(SQLITE_PATH, 'STOCKDATA.db')
     dbcn = sqlite3.connect(dbfn)
     curs = dbcn.cursor()
     sql='''select bdrq,bdsl,bdfx from gggdcgbd 
@@ -7188,8 +7250,9 @@ def dl_syl():
         cmd_re = subprocess.run("pythonw.exe d:\\selestock\\dlsyl.py", shell=True, stdout=subprocess.PIPE)
         print(cmd_re.stdout.decode('GBK'))
         cmd_re = subprocess.run("pythonw.exe d:\\hyb\\syl2sqlite.py", shell=True, stdout=subprocess.PIPE)
+        print(cmd_re.stdout.decode('GBK')) 
+        cmd_re = subprocess.run("pythonw.exe d:\pandas-ta_project\stock_pandas\misc\gpgm.py", shell=True, stdout=subprocess.PIPE)
         print(cmd_re.stdout.decode('GBK'))
-    
     return
     
 
@@ -7694,7 +7757,7 @@ if __name__ == '__main__':
     dl_zyl_ltg()
 
     #每周更新一次复权数据文件，这个功能是在d:\adjf\dl_adjfactor.py中实现的
-    dl_adjfactor()
+#    dl_adjfactor()
 
 #    
     now1 = datetime.datetime.now().strftime('%H:%M:%S')
